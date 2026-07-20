@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arena-fedllm"
+version = "1.0.0"
+description = "ARENA federated LLM fine-tuning system: simulation setup"
+license = "Apache-2.0"
+dependencies = [
+    "flwr[simulation]>=1.32.1",
+    "flwr-datasets>=0.6.0",
+    "torch==2.10.0",
+    "trl==0.8.1",
+    "bitsandbytes==0.49.1",
+    "scipy==1.13.0",
+    "peft==0.6.2",
+    "fschat[model_worker,webui]==0.2.35",
+    "transformers==4.53.0",
+    "sentencepiece==0.2.1",
+    "omegaconf==2.3.0",
+    "hf_transfer==0.1.8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.flwr.app]
+publisher = "${oc.env:PUBLISHER_NAME,user_arena}"
+
+[tool.flwr.app.components]
+serverapp = "arena_fedllm.server_app:app"
+clientapp = "arena_fedllm.client_app:app"
+
+[tool.flwr.app.config]
+dataset.name = "${oc.env:DATA_FILE_NAME,arena_fedllm/eosc_dataset.csv}"
+model.name = "${oc.env:MODEL_NAME,HuggingFaceTB/SmolLM2-1.7B-Instruct}"
+published = "${oc.env:PUBLISHED,false}"
+model.quantization = "${oc.env:MODEL_QUANTIZATION,4}"
+model.gradient-checkpointing = "${oc.env:MODEL_GRADIENT_CHECKPOINTING,true}"
+model.lora.peft-lora-r = "${oc.env:PEFT_LORA_R,32}"
+model.lora.peft-lora-alpha = "${oc.env:PEFT_LORA_ALPHA,64}"
+train.save-every-round = "${oc.env:SAVE_EVERY_ROUND,5}"
+train.learning-rate-max = "${oc.env:LEARNING_RATE_MAX,5e-5}"
+train.learning-rate-min = "${oc.env:LEARNING_RATE_MIN,1e-6}"
+train.seq-length = "${oc.env:SEQ_LENGTH,512}"
+train.training-arguments.output-dir = "${oc.env:OUTPUT_DIR,}"
+train.training-arguments.learning-rate = "${oc.env:TRAINING_LEARNING_RATE,}"
+train.training-arguments.per-device-train-batch-size = "${oc.env:PER_DEVICE_TRAIN_BATCH_SIZE,1}"
+train.training-arguments.gradient-accumulation-steps = "${oc.env:GRADIENT_ACCUMULATION_STEPS,1}"
+train.training-arguments.logging-steps = "${oc.env:LOGGING_STEPS,10}"
+train.training-arguments.num-train-epochs = "${oc.env:NUM_TRAIN_EPOCHS,3}"
+train.training-arguments.max-steps = "${oc.env:MAX_STEPS,10}"
+train.training-arguments.save-steps = "${oc.env:SAVE_STEPS,1000}"
+train.training-arguments.save-total-limit = "${oc.env:SAVE_TOTAL_LIMIT,10}"
+train.training-arguments.gradient-checkpointing = "${oc.env:TRAINING_GRADIENT_CHECKPOINTING,true}"
+train.training-arguments.lr-scheduler-type = "${oc.env:LR_SCHEDULER_TYPE,constant}"
+strategy.fraction-train = "${oc.env:FRACTION_TRAIN,0.1}"
+strategy.fraction-evaluate = "${oc.env:FRACTION_EVALUATE,0.0}"
+strategy.name = "${oc.env:FEDERATED_STRATEGY,Federated Averaging (FedAvg)}"
+strategy.fedprox.mu = "${oc.env:FEDPROX_MU,0.01}"
+strategy.fedavgm.server-learning-rate = "${oc.env:FEDAVGM_SERVER_LEARNING_RATE,0.1}"
+strategy.fedavgm.server-momentum = "${oc.env:FEDAVGM_SERVER_MOMENTUM,0.9}"
+num-server-rounds = "${oc.env:NUM_RUNS,100}"
