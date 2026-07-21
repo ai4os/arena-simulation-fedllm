@@ -32,7 +32,7 @@ The enviroment variables, including the path to the data (data have to be upload
 
 ```bash
 cd arena-fedllm
-flwr run . -- stream
+flwr run . --stream
 ```
  
 ## How data is distributed
