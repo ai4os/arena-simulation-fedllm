@@ -1,6 +1,6 @@
 # ARENA FlowerTune app for simulating the fine-tuning of LLMs
 
-Simulation-mode version of the federated fine-tuning app based on FloweTune. This FlowerTune LLM app (`client_app.py`, `server_app.py`, `dataset.py`, `models.py`) runs with Flower's **simulation** federation: the server and every client run as processes on the **same machine**, inside the same `flwr run` invocation.
+Simulation-mode version of the federated fine-tuning app based on [FloweTune](https://flower.ai/docs/examples/flowertune-llm.html). This FlowerTune LLM app (`client_app.py`, `server_app.py`, `dataset.py`, `models.py`) runs with Flower's **simulation** federation: the server and every client run as processes on the **same machine**, inside the same `flwr run` process.
 
 The base model and the dataset are both fully configurable by the user: this app is not tied to any specific model or dataset. This is selected in the `MODEL_NAME` and `DATA_FILE_NAME` environment variables which are set when launching the service from the [dashboard](https://dashboard.cloud.ai4eosc.eu).
 
@@ -37,8 +37,8 @@ flwr run . -- stream
  
 ## How data is distributed
  
-By default, a single CSV file (set via `DATA_FILE_NAME`, i.e.
-`dataset.name`) is split into `num-supernodes` IID partitions using `flwr_datasets`' `IidPartitioner`. Each simulated client is assigned one partition by `partition-id` and only trains on that slice.
+By default, a single CSV file (set via `DATA_FILE_NAME`, i.e. 
+`dataset.name`) is split into `num-supernodes` partitions using [`flwr_datasets`](https://flower.ai/docs/datasets/). Each simulated client is assigned one partition by `partition-id` and only trains on that slice.
 
 ## Environment variables to be configured
  
