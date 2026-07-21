@@ -1,6 +1,6 @@
 # ARENA FlowerTune app for simulating the fine-tuning of LLMs
 
-Simulation-mode version of the federated fine-tuning app based on [FloweTune](https://flower.ai/docs/examples/flowertune-llm.html). This FlowerTune LLM app (`client_app.py`, `server_app.py`, `dataset.py`, `models.py`) runs with Flower's **simulation** federation: the server and every client run as processes on the **same machine**, inside the same `flwr run` process.
+Simulation-mode version of the federated fine-tuning app based on [FlowerTune](https://flower.ai/docs/examples/flowertune-llm.html). This FlowerTune LLM app (`client_app.py`, `server_app.py`, `dataset.py`, `models.py`) runs with Flower's **simulation** federation: the server and every client run as processes on the **same machine**, inside the same `flwr run` process.
 
 The base model and the dataset are both fully configurable by the user: this app is not tied to any specific model or dataset. This is selected in the `MODEL_NAME` and `DATA_FILE_NAME` environment variables which are set when launching the service from the [dashboard](https://dashboard.cloud.ai4eosc.eu).
 
