@@ -17,7 +17,7 @@ The base model and the dataset are both fully configurable by the user: this app
 >   data-isolation property of your system. 
 > - Launch the server and the clients in different machines with TLS-secured connections if you want to use private data in each client. 
 
-## Why use simulation?
+## Why use the simulation model?
  
 - **Quick tests before requesting real resources**: verify that your model, dataset, or LoRA configuration actually converges during training and produces the expected results before proceeding to provision GPUs on multiple physical machines (or in a cluster), which is slower and more complex to set up.
 - **Measure distribution efficiency**: get a first read on aggregation   overhead, per-round timing, and how training loss evolves as you change  `num-server-rounds` or the number of simulated clients.
@@ -40,7 +40,7 @@ flwr run . -- stream
 By default, a single CSV file (set via `DATA_FILE_NAME`, i.e.
 `dataset.name`) is split into `num-supernodes` IID partitions using `flwr_datasets`' `IidPartitioner`. Each simulated client is assigned one partition by `partition-id` and only trains on that slice.
 
-### Environment variables to be configured
+## Environment variables to be configured
  
 | Environment variable | Default | Description |
 |---|---|---|
@@ -56,6 +56,7 @@ By default, a single CSV file (set via `DATA_FILE_NAME`, i.e.
 | `LEARNING_RATE_MIN` | `1e-6` | Cosine schedule floor LR |
 | `SEQ_LENGTH` | `512` | Max training sequence length |
 | `NUM_TRAIN_EPOCHS` | `3` | Local epochs per client per round |
+| `SAVE_TOTAL_LIMIT` | `10` | Max checkpoints kept |
 | `FRACTION_TRAIN` | `0.1` | Fraction of clients sampled per round for training |
 | `FRACTION_EVALUATE` | `0.0` | Fraction of clients sampled per round for evaluation |
 | `FEDERATED_STRATEGY` | `Federated Averaging (FedAvg)` | Aggregation strategy used |
