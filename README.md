@@ -76,5 +76,5 @@ This project is licensed under the [Apache 2.0 license](https://github.com/ai4os
 This work is funded by European Union through the EOSC-ARENA project (Horizon Europe) under Grant number [101292597](https://cordis.europa.eu/project/id/101292597).
 <p>
 <img align="center" width="250" src="https://raw.githubusercontent.com/AI4EOSC/.github/ai4eosc/profile/EN-Funded.jpg">
-<img align="center" width="350" src="https://ai4eosc.eu/_astro/EOSC-ARENA.DElvfRq2.png">
+<img align="center" width="300" src="https://ai4eosc.eu/_astro/arena_logo_white.CRdi1OPK.png">
 <p>
