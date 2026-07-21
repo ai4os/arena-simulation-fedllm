@@ -17,4 +17,4 @@ WORKDIR /app/arena-fedllm
 RUN python -m pip install --upgrade pip \
     && pip install -e .
 
-CMD ["flwr", "run", ".", "--stream"]
+# CMD ["flwr", "run", ".", "--stream"]
