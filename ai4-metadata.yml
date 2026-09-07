@@ -1,0 +1,42 @@
+metadata_version: 1.0.0
+title: ARENA FlowerTune LLM simulation
+summary: Simulate federated fine-tuning of large language models with Flower.
+description: |-
+  Simulation-mode federated learning application for fine-tuning large language
+  models using Flower.
+
+  The server and simulated clients run as processes on the same machine. A
+  configurable dataset is split into non-overlapping partitions, one for
+  each simulated client, and the locally trained LoRA parameters are aggregated
+  using the selected strategy (e.g., FedAvg, FedAvgM, FedProx, FedMedian, FedAvgOpt).
+
+  The base model, dataset, quantization, LoRA settings, training parameters,
+  and federated strategy are configurable through environment variables. The
+  application is intended for local testing, experimentation, debugging, and
+  resource estimation before a real distributed federated deployment.
+
+dates:
+  created: '2026-07-20'
+  updated: '2026-09-07'
+links:
+  source_code: https://github.com/ai4os/arena-simulation-fedllm
+  docker_image: ai4oshub/arena-simulation-fedllm
+  ai4_template: ai4-template/1.9.9
+tags:
+  - federated learning
+  - large language models
+  - fine-tuning
+  - LoRA
+  - Flower
+  - simulation
+tasks:
+  - Other
+categories:
+  - AI4 tools
+libraries:
+  - Flower
+  - Transformers
+  - PEFT
+  - TRL
+data-type:
+  - Other
