@@ -37,4 +37,4 @@ RUN python -m pip install --upgrade pip \
 EXPOSE 8888
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["deep-start", "-j"]
+CMD ["bash", "-lc", "cd /app/arena-fedllm && flwr run . --stream"]
