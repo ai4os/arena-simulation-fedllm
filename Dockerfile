@@ -1,7 +1,7 @@
 FROM python:3.10-slim
 
 LABEL maintainer='Judith Sáinz-Pardo '
-LABEL version='0.0.1'
+LABEL version='0.3'
 
 ARG branch=main
 
@@ -34,7 +34,7 @@ WORKDIR /app/arena-fedllm
 RUN python -m pip install --upgrade pip \
     && pip install -e .
 
-EXPOSE 8888
+EXPOSE 5000 6006 8888
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["bash", "-lc", "cd /app/arena-fedllm && flwr run . --stream"]
+CMD ["bash", "-lc", "mkdir -p /storage/logs && cd /app/arena-fedllm && flwr run . --stream 2>&1 | tee /storage/logs/run_$(date +%F_%H-%M-%S).log; cp -r /root/.flwr /storage/logs/flwr-home 2>/dev/null; sleep infinity"]

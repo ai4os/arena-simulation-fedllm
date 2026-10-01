@@ -28,8 +28,8 @@ def main(grid: Grid, context: Context) -> None:
     os.makedirs(save_path, exist_ok=True)
 
     # Read from config
-    num_rounds = context.run_config["num-server-rounds"]
     cfg = DictConfig(replace_keys(unflatten_dict(context.run_config)))
+    num_rounds = int(cfg.num_server_rounds)
 
     # Get initial model weights
     init_model = get_model(cfg.model)
@@ -42,11 +42,11 @@ def main(grid: Grid, context: Context) -> None:
         "fraction_evaluate": cfg.strategy.fraction_evaluate,
     }
 
-    if strategy_name == "Federated Averaging (FedAvg)" or strategy_name == "FedAvg":
+    if strategy_name == "Federated Averaging" or strategy_name == "FedAvg":
         strategy = FedAvg(**strategy_kwargs)
-    elif strategy_name == "Federated Median (FedMedian)":
+    elif strategy_name == "FedMedian":
         strategy = FedMedian(**strategy_kwargs)
-    elif strategy_name == "Federated Averaging with Momentum (FedAvgM)":
+    elif strategy_name == "FedAvgM":
         strategy = FedAvgM(
             **strategy_kwargs,
             server_learning_rate=cfg.strategy.fedavgm.server_learning_rate,

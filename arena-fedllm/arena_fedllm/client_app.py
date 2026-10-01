@@ -34,8 +34,8 @@ def train(msg: Message, context: Context):
     # Parse config
     partition_id = context.node_config["partition-id"]
     num_partitions = context.node_config["num-partitions"]
-    num_rounds = context.run_config["num-server-rounds"]
     cfg = DictConfig(replace_keys(unflatten_dict(context.run_config)))
+    num_rounds = cfg.num_server_rounds
     training_arguments = TrainingArguments(**cfg.train.training_arguments)
 
     # Get the client partition

@@ -59,11 +59,11 @@ By default, a single CSV file (set via `DATA_FILE_NAME`, i.e.
 | `SAVE_TOTAL_LIMIT` | `10` | Max checkpoints kept |
 | `FRACTION_TRAIN` | `0.1` | Fraction of clients sampled per round for training |
 | `FRACTION_EVALUATE` | `0.0` | Fraction of clients sampled per round for evaluation |
-| `FEDERATED_STRATEGY` | `Federated Averaging (FedAvg)` | Aggregation strategy used |
+| `FEDERATED_STRATEGY` | `FedAvg` | Aggregation strategy used |
 | `FEDPROX_MU` | `0.01` | Proximal term weight (only used if `FEDERATED_STRATEGY` is FedProx) |
 | `FEDAVGM_SERVER_LEARNING_RATE` | `0.1` | Server-side LR (only used if `FEDERATED_STRATEGY` is FedAvgM) |
 | `FEDAVGM_SERVER_MOMENTUM` | `0.9` | Server-side momentum (only used if `FEDERATED_STRATEGY` is FedAvgM) |
-| `NUM_RUNS` | `100` | Number of federated rounds |
+| `NUM_ROUNDS` | `100` | Number of federated rounds |
 
 
 ### Warning
