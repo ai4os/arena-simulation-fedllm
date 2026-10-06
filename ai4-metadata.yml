@@ -1,5 +1,5 @@
 metadata_version: 1.0.0
-title: ARENA FlowerTune LLM simulation
+title: ARENA Federated LLM Fine-Tuning Simulation
 summary: Simulate federated fine-tuning of large language models with Flower.
 description: |-
   Simulation-mode federated learning application for fine-tuning large language
@@ -14,6 +14,34 @@ description: |-
   and federated strategy are configurable through environment variables. The
   application is intended for local testing, experimentation, debugging, and
   resource estimation before a real distributed federated deployment.
+
+  ### Environment variables to be configured
+
+  The following variables can be configured in the form when launching the service.
+
+  | Environment variable | Default | Description |
+  |---|---|---|
+  | `HF_TOKEN` | `---` | HuggingFace token |
+  | `PUBLISHER_NAME` | `user_arena` | Publisher name (user, optional) |
+  | `DATA_FILE_NAME` | `arena_fedllm/eosc_dataset.csv` | Path to the training data |
+  | `MODEL_NAME` | `HuggingFaceTB/SmolLM2-1.7B-Instruct` | Base model |
+  | `MODEL_QUANTIZATION` | `4` | Quantization bits (4 or 8) |
+  | `PEFT_LORA_R` | `32` | LoRA rank |
+  | `PEFT_LORA_ALPHA` | `64` | LoRA alpha |
+  | `SAVE_EVERY_ROUND` | `5` | Save a checkpoint every N rounds |
+  | `LEARNING_RATE_MAX` | `5e-5` | Cosine schedule peak LR |
+  | `LEARNING_RATE_MIN` | `1e-6` | Cosine schedule floor LR |
+  | `SEQ_LENGTH` | `512` | Max training sequence length |
+  | `NUM_TRAIN_EPOCHS` | `3` | Local epochs per client per round |
+  | `SAVE_TOTAL_LIMIT` | `10` | Max checkpoints kept |
+  | `FRACTION_TRAIN` | `0.1` | Fraction of clients sampled per round for training |
+  | `FRACTION_EVALUATE` | `0.0` | Fraction of clients sampled per round for evaluation |
+  | `FEDERATED_STRATEGY` | `FedAvg` | Aggregation strategy used |
+  | `FEDPROX_MU` | `0.01` | Proximal term weight (only used if `FEDERATED_STRATEGY` is FedProx) |
+  | `FEDAVGM_SERVER_LEARNING_RATE` | `0.1` | Server-side LR (only used if `FEDERATED_STRATEGY` is FedAvgM) |
+  | `FEDAVGM_SERVER_MOMENTUM` | `0.9` | Server-side momentum (only used if `FEDERATED_STRATEGY` is FedAvgM) |
+  | `NUM_ROUNDS` | `100` | Number of federated rounds |
+
 
 dates:
   created: '2026-07-20'
