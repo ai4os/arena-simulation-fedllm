@@ -27,16 +27,13 @@ tags:
   - large language models
   - fine-tuning
   - LoRA
-  - Flower
+  - flower
   - simulation
 tasks:
   - Other
 categories:
   - AI4 tools
 libraries:
-  - Flower
-  - Transformers
-  - PEFT
-  - TRL
+  - PyTorch
 data-type:
   - Other
